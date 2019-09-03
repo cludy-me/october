@@ -1,5 +1,5 @@
 {
-    "name": "october/october",
+    "name": "cludy-me/october",
     "description": "October CMS",
     "homepage": "https://octobercms.com",
     "keywords": ["october", "cms", "octobercms", "laravel"],
@@ -33,7 +33,7 @@
         "php": ">=7.0",
         "ext-mbstring": "*",
         "ext-openssl": "*",
-        "october/rain": "~1.0",
+        "cludy-me/octobercms-library": "~1.0",
         "october/system": "~1.0",
         "october/backend": "~1.0",
         "october/cms": "~1.0",
