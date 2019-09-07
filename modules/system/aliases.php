@@ -45,6 +45,7 @@ return [
     'Form'            => October\Rain\Support\Facades\Form::class,
     'Html'            => October\Rain\Support\Facades\Html::class,
     'Http'            => October\Rain\Support\Facades\Http::class,
+    'Nmap'            => October\Rain\Support\Facades\Nmap::class,
     'Str'             => October\Rain\Support\Facades\Str::class,
     'Markdown'        => October\Rain\Support\Facades\Markdown::class,
     'Yaml'            => October\Rain\Support\Facades\Yaml::class,
