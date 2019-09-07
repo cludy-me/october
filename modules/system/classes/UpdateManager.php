@@ -760,20 +760,20 @@ class UpdateManager
     {
         $result = Http::get('https://octobercms.com/changelog?json');
 
-        if ($result->code == 404) {
+        if ($result->status() == 404) {
             throw new ApplicationException(Lang::get('system::lang.server.response_empty'));
         }
 
-        if ($result->code != 200) {
+        if ($result->status() != 200) {
             throw new ApplicationException(
-                strlen($result->body)
-                ? $result->body
+                strlen($result->content())
+                ? $result->content()
                 : Lang::get('system::lang.server.response_empty')
             );
         }
 
         try {
-            $resultData = json_decode($result->body, true);
+            $resultData = json_decode($result->content(), true);
         }
         catch (Exception $ex) {
             throw new ApplicationException(Lang::get('system::lang.server.response_invalid'));
@@ -853,14 +853,14 @@ class UpdateManager
             $this->applyHttpAttributes($http, $postData);
         });
 
-        if ($result->code == 404) {
+        if ($result->status() == 404) {
             throw new ApplicationException(Lang::get('system::lang.server.response_not_found'));
         }
 
-        if ($result->code != 200) {
+        if ($result->status() != 200) {
             throw new ApplicationException(
-                strlen($result->body)
-                ? $result->body
+                strlen($result->content())
+                ? $result->content()
                 : Lang::get('system::lang.server.response_empty')
             );
         }
@@ -868,7 +868,7 @@ class UpdateManager
         $resultData = false;
 
         try {
-            $resultData = @json_decode($result->body, true);
+            $resultData = @json_decode($result->content(), true);
         }
         catch (Exception $ex) {
             throw new ApplicationException(Lang::get('system::lang.server.response_invalid'));
@@ -898,7 +898,7 @@ class UpdateManager
             $http->toFile($filePath);
         });
 
-        if ($result->code != 200) {
+        if ($result->status() != 200) {
             throw new ApplicationException(File::get($filePath));
         }
 
