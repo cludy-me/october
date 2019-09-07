@@ -33,10 +33,7 @@
         "php": ">=7.0",
         "ext-mbstring": "*",
         "ext-openssl": "*",
-        "cludy-me/octobercms-library": "~1.0",
-        "october/system": "~1.0",
-        "october/backend": "~1.0",
-        "october/cms": "~1.0",
+        "cludy-me/octobercms-library": "dev-master",
         "laravel/framework": "5.5.*",
         "wikimedia/composer-merge-plugin": "dev-master"
     },
@@ -76,6 +73,7 @@
     "extra": {
         "merge-plugin": {
             "include": [
+                "modules/*/composer.json",
                 "plugins/*/*/composer.json"
             ],
             "recurse": true,
