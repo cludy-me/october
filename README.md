@@ -17,7 +17,9 @@ You may also watch these introductory videos for [beginners](https://vimeo.com/7
 
 ### Installing October
 
-Instructions on how to install October can be found at the [installation guide](https://octobercms.com/docs/setup/installation).
+```shell
+composer create-project --prefer-dist cludy-me/octobercms octobercms "dev-master"
+```
 
 ### Quick start installation
 
