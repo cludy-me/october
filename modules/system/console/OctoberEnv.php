@@ -470,10 +470,10 @@ class OctoberEnv extends Command
     {
         return [
             'uploads' => [
-                'UPLOADS_PATH' => 'path',
+                'CMS_UPLOADS_PATH' => 'path',
             ],
             'media' => [
-                'MEDIA_PATH' => 'path',
+                'CMS_MEDIA_PATH' => 'path',
             ]
         ];
     }
