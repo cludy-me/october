@@ -1,4 +1,6 @@
-<?php namespace System\Console;
+<?php
+
+namespace System\Console;
 
 use Illuminate\Console\Command;
 
@@ -91,6 +93,8 @@ class OctoberEnv extends Command
     {
         $lines = [];
 
+        $this->writeToEnv("# " . $this->config . ".php\n");
+
         foreach ($this->lines() as $line) {
             $keys = $this->config()[$this->config];
 
@@ -110,6 +114,8 @@ class OctoberEnv extends Command
     private function parseLine($line, $keys)
     {
         $line = $this->replaceConfigLine($line, $keys);
+
+        $line = $this->replaceCmsStorageConfigLine($line);
 
         $line = $this->replaceDbConfigLine($line);
 
@@ -144,6 +150,25 @@ class OctoberEnv extends Command
     {
         if ($this->config == 'database') {
             foreach ($this->dbConfig() as $connection => $settings) {
+                $this->setCurrentConnection($line, $connection);
+
+                if ($this->connection == $connection) {
+                    $line = $this->replaceConfigLine($line, $settings);
+                }
+            }
+        }
+
+        return $line;
+    }
+
+    /**
+     * @param $line
+     * @return mixed
+     */
+    private function replaceCmsStorageConfigLine($line)
+    {
+        if ($this->config == 'cms') {
+            foreach ($this->cmsStorageConfig() as $connection => $settings) {
                 $this->setCurrentConnection($line, $connection);
 
                 if ($this->connection == $connection) {
@@ -202,7 +227,7 @@ class OctoberEnv extends Command
      */
     private function saveEnvSettings($key, $value)
     {
-        if (! $this->envKeyExists($key)) {
+        if (!$this->envKeyExists($key)) {
             $line = sprintf("%s=%s\n", $key, $this->stripQuotes($value));
 
             if ($this->config == 'database' && $key != 'DB_CONNECTION') {
@@ -231,11 +256,28 @@ class OctoberEnv extends Command
     {
         $value = config("$this->config.$configKey");
 
+        if ($this->config == 'cms') {
+            $value = $this->cmsConfigValue($configKey);
+        }
+
         if ($this->config == 'database') {
             $value = $this->databaseConfigValue($configKey);
         }
 
         return $this->normalize($value);
+    }
+
+    /**
+     * @param $configKey
+     * @return string
+     */
+    private function cmsConfigValue($configKey)
+    {
+        if (!$this->connection) {
+            return config("cms.$configKey");
+        }
+
+        return config("cms.storage.$this->connection.$configKey");
     }
 
     /**
@@ -345,19 +387,34 @@ class OctoberEnv extends Command
                 'APP_DEBUG' => 'debug',
                 'APP_URL' => 'url',
                 'APP_KEY' => 'key',
+                'APP_TIMEZONE' => 'timezone',
+                'APP_LOCALE' => 'locale',
+                'APP_FALLBACK_LOCALE' => 'fallback_locale',
+                'APP_LOG' => 'log',
+                'APP_LOG_MAX_FILES' => 'log_max_files',
+            ],
+            'cache' => [
+                'CACHE_DRIVER' => 'default',
+                'CACHE_PREFIX' => 'prefix',
+            ],
+            'cms' => [
+                'CMS_ACTIVE_THEME' => 'activeTheme',
+                'CMS_BACKEND_URI' => 'backendUri',
+                'CMS_BACKEND_FORCE_SECURE' => 'backendForceSecure',
+                'CMS_BACKEND_FORCE_REMEMBER' => 'backendForceRemember',
+                'CMS_BACKEND_TIMEZONE' => 'backendTimezone',
+                'CMS_ROUTES_CACHE' => 'enableRoutesCache',
+                'CMS_ASSET_CACHE' => 'enableAssetCache',
+                'CMS_ASSET_MINIFY' => 'enableAssetMinify',
+                'CMS_PLUGINS_PATH' => 'pluginsPath',
+                'CMS_THEMES_PATH' => 'themesPath',
+                'CMS_LINK_POLICY' => 'linkPolicy',
+                'CMS_ENABLE_CSRF' => 'enableCsrfProtection',
+                'CMS_DATABASE_TEMPLATES' => 'databaseTemplates'
             ],
             'database' => [
                 'DB_CONNECTION' => 'default',
                 'DB_USE_CONFIG_FOR_TESTING' => 'useConfigForTesting',
-            ],
-            'cache' => [
-                'CACHE_DRIVER' => 'default',
-            ],
-            'session' => [
-                'SESSION_DRIVER' => 'driver',
-            ],
-            'queue' => [
-                'QUEUE_DRIVER' => 'default',
             ],
             'mail' => [
                 'MAIL_DRIVER' => 'driver',
@@ -367,13 +424,16 @@ class OctoberEnv extends Command
                 'MAIL_PASSWORD' => 'password',
                 'MAIL_ENCRYPTION' => 'encryption',
             ],
-            'cms' => [
-                'ROUTES_CACHE' => 'enableRoutesCache',
-                'ASSET_CACHE' => 'enableAssetCache',
-                'LINK_POLICY' => 'linkPolicy',
-                'ENABLE_CSRF' => 'enableCsrfProtection',
-                'DATABASE_TEMPLATES' => 'databaseTemplates'
+            'queue' => [
+                'QUEUE_DRIVER' => 'default',
             ],
+            'session' => [
+                'SESSION_DRIVER' => 'driver',
+                'SESSION_COOKIE' => 'cookie',
+                'SESSION_COOKIE_PATH' => 'path',
+                'SESSION_COOKIE_DOMAIN' => 'domain',
+                'SESSION_COOKIE_SECURE' => 'secure',
+            ]
         ];
     }
 
@@ -405,6 +465,18 @@ class OctoberEnv extends Command
                 'REDIS_PASSWORD' => 'password',
                 'REDIS_PORT' => 'port',
             ],
+        ];
+    }
+
+    private function cmsStorageConfig()
+    {
+        return [
+            'uploads' => [
+                'UPLOADS_PATH' => 'path',
+            ],
+            'media' => [
+                'MEDIA_PATH' => 'path',
+            ]
         ];
     }
 }
