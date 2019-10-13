@@ -739,10 +739,82 @@ class FormController extends ControllerBehavior
     }
 
     /**
+     * Called before the form model is deleted.
+     * @param Model
+     */
+    public function formBeforeDelete($model)
+    {
+    }
+
+    /**
      * Called after the form model is deleted.
      * @param Model
      */
     public function formAfterDelete($model)
+    {
+    }
+
+    /**
+     * Called before the form model is force deleted.
+     * @param Model
+     */
+    public function formBeforeForceDelete($model)
+    {
+    }
+
+    /**
+     * Called after the form model is force deleted.
+     * @param Model
+     */
+    public function formAfterForceDelete($model)
+    {
+    }
+
+    /**
+     * Called before the form model is restored.
+     * @param Model
+     */
+    public function formBeforeRestore($model)
+    {
+    }
+
+    /**
+     * Called after the form model is restored.
+     * @param Model
+     */
+    public function formAfterRestore($model)
+    {
+    }
+
+    /**
+     * Called before the form model is disabled.
+     * @param Model
+     */
+    public function formBeforeDisable($model)
+    {
+    }
+
+    /**
+     * Called after the form model is disabled.
+     * @param Model
+     */
+    public function formAfterDisable($model)
+    {
+    }
+
+    /**
+     * Called before the form model is enabled.
+     * @param Model
+     */
+    public function formBeforeEnable($model)
+    {
+    }
+
+    /**
+     * Called after the form model is enabled.
+     * @param Model
+     */
+    public function formAfterEnable($model)
     {
     }
 
