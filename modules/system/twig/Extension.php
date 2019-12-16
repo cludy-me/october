@@ -1,11 +1,8 @@
-<?php
-
-namespace System\Twig;
+<?php namespace System\Twig;
 
 use Url;
 use Twig\Extension\AbstractExtension as TwigExtension;
 use Twig\TwigFilter as TwigSimpleFilter;
-use Twig\TwigFunction as TwigSimpleFunction;
 use System\Classes\MediaLibrary;
 use System\Classes\MarkupManager;
 
@@ -99,8 +96,7 @@ class Extension extends TwigExtension
     {
         ob_start();
         var_dump($expression);
-        $result = ob_get_clean();
-        return $result;
+        return ob_get_clean();
     }
 
     /**
@@ -162,8 +158,7 @@ class Extension extends TwigExtension
     {
         ob_start();
         var_dump($expression);
-        $result = ob_get_clean();
-        return $result;
+        return  ob_get_clean();
     }
 
 }

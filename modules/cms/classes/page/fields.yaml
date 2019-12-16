@@ -149,7 +149,7 @@ tabs:
             tab: cms::lang.editor.sitemap
             label: cms::lang.editor.sitemap_changefreq
             type: dropdown
-            options: 
+            options:
                 always: always
                 hourly: hourly
                 weekly: weekly
@@ -195,6 +195,12 @@ secondaryTabs:
             stretch: true
             type: codeeditor
             language: twig
+
+        safemode_notice:
+            tab: cms::lang.editor.code
+            type: partial
+            hidden: true
+            cssClass: p-b-0
 
         code:
             tab: cms::lang.editor.code

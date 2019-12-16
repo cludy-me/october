@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Classes;
+<?php namespace Cms\Classes;
 
 use Lang;
 use ApplicationException;
