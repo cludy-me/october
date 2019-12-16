@@ -3,6 +3,7 @@
 use Url;
 use Twig\Extension\AbstractExtension as TwigExtension;
 use Twig\TwigFilter as TwigSimpleFilter;
+use Twig\TwigFunction as TwigSimpleFunction;
 use System\Classes\MediaLibrary;
 use System\Classes\MarkupManager;
 
