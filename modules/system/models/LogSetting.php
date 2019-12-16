@@ -39,11 +39,8 @@ class LogSetting extends Model
         if (!self::isConfigured()) {
             $manager->removeSettingItem('October.System', 'request_logs');
             $manager->removeSettingItem('October.Cms', 'theme_logs');
+            $manager->removeSettingItem('October.System', 'bot_logs');
             return;
-        }
-
-        if (!self::get('log_events')) {
-            $manager->removeSettingItem('October.System', 'event_logs');
         }
 
         if (!self::get('log_requests')) {
@@ -52,6 +49,14 @@ class LogSetting extends Model
 
         if (!self::get('log_theme')) {
             $manager->removeSettingItem('October.Cms', 'theme_logs');
+        }
+
+        if (!self::get('log_events')) {
+            $manager->removeSettingItem('October.System', 'event_logs');
+        }
+
+        if (!self::get('log_bots')) {
+            $manager->removeSettingItem('October.System', 'log_bots');
         }
     }
 
@@ -62,8 +67,9 @@ class LogSetting extends Model
      */
     public function initSettingsData()
     {
-        $this->log_events = true;
-        $this->log_requests = false;
+        $this->log_requests = true;
         $this->log_theme = false;
+        $this->log_events = true;
+        $this->log_bots = true;
     }
 }

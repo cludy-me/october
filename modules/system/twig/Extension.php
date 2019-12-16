@@ -1,8 +1,11 @@
-<?php namespace System\Twig;
+<?php
+
+namespace System\Twig;
 
 use Url;
 use Twig\Extension\AbstractExtension as TwigExtension;
 use Twig\TwigFilter as TwigSimpleFilter;
+use Twig\TwigFunction as TwigSimpleFunction;
 use System\Classes\MediaLibrary;
 use System\Classes\MarkupManager;
 
@@ -34,14 +37,70 @@ class Extension extends TwigExtension
      */
     public function getFunctions()
     {
-        $functions = [];
-
         /*
          * Include extensions provided by plugins
          */
-        $functions = $this->markupManager->makeTwigFunctions($functions);
+        return $this->markupManager->makeTwigFunctions([
+            new TwigSimpleFunction('config', [$this, 'configFunction'], ['is_safe' => ['html']]),
+            new TwigSimpleFunction('env', [$this, 'envFunction'], ['is_safe' => ['html']]),
+            new TwigSimpleFunction('session', [$this, 'sessionFunction'], ['is_safe' => ['html']]),
+            new TwigSimpleFunction('trans', [$this, 'transFunction'], ['is_safe' => ['html']]),
+            new TwigSimpleFunction('var_dump', [$this, 'varDumpFunction'], ['is_safe' => ['html']]),
 
-        return $functions;
+        ]);
+    }
+
+    /**
+     * Works like the config() helper function.
+     *
+     * @return mixed
+     */
+    public function configFunction($key, $default = null)
+    {
+        return config($key, $default);
+    }
+
+    /**
+     * Works like the env() helper function.
+     *
+     * @return mixed
+     */
+    public function envFunction($key, $default = null)
+    {
+        return env($key, $default);
+    }
+
+    /**
+     * Works like the session() helper function.
+     *
+     * @return mixed
+     */
+    public function sessionFunction($key)
+    {
+        return session($key);
+    }
+
+    /**
+     * Works like the trans() helper function.
+     *
+     * @return mixed
+     */
+    public function transFunction($key, $parameters = [])
+    {
+        return trans($key, $parameters);
+    }
+
+    /**
+     * Dumps information about a variable.
+     *
+     * @return mixed
+     */
+    public function varDumpFunction($expression)
+    {
+        ob_start();
+        var_dump($expression);
+        $result = ob_get_clean();
+        return $result;
     }
 
     /**
@@ -51,17 +110,14 @@ class Extension extends TwigExtension
      */
     public function getFilters()
     {
-        $filters = [
-            new TwigSimpleFilter('app', [$this, 'appFilter'], ['is_safe' => ['html']]),
-            new TwigSimpleFilter('media', [$this, 'mediaFilter'], ['is_safe' => ['html']]),
-        ];
-
         /*
          * Include extensions provided by plugins
          */
-        $filters = $this->markupManager->makeTwigFilters($filters);
-
-        return $filters;
+        return $this->markupManager->makeTwigFilters([
+            new TwigSimpleFilter('app', [$this, 'appFilter'], ['is_safe' => ['html']]),
+            new TwigSimpleFilter('media', [$this, 'mediaFilter'], ['is_safe' => ['html']]),
+            new TwigSimpleFilter('var_dump', [$this, 'varDumpFilter'], ['is_safe' => ['html']]),
+        ]);
     }
 
     /**
@@ -71,14 +127,10 @@ class Extension extends TwigExtension
      */
     public function getTokenParsers()
     {
-        $parsers = [];
-
         /*
          * Include extensions provided by plugins
          */
-        $parsers = $this->markupManager->makeTwigTokenParsers($parsers);
-
-        return $parsers;
+        return $this->markupManager->makeTwigTokenParsers([]);
     }
 
     /**
@@ -100,4 +152,18 @@ class Extension extends TwigExtension
     {
         return MediaLibrary::url($file);
     }
+
+    /**
+     * Dumps information about a variable.
+     *
+     * @return mixed
+     */
+    public function varDumpFilter($expression)
+    {
+        ob_start();
+        var_dump($expression);
+        $result = ob_get_clean();
+        return $result;
+    }
+
 }

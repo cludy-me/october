@@ -1,0 +1,8 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+
+    url:
+        label: system::lang.bot_log.url

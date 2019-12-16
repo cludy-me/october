@@ -1,4 +1,6 @@
-<?php namespace Cms\Classes;
+<?php
+
+namespace Cms\Classes;
 
 use Lang;
 use ApplicationException;
@@ -21,13 +23,6 @@ class Page extends CmsCompoundObject
      * @var array The attributes that are mass assignable.
      */
     protected $fillable = [
-        'url',
-        'layout',
-        'title',
-        'description',
-        'is_hidden',
-        'meta_title',
-        'meta_description',
         'markup',
         'settings',
         'code'
@@ -231,4 +226,5 @@ class Page extends CmsCompoundObject
 
         return $result;
     }
+
 }

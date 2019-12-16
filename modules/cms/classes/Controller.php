@@ -26,6 +26,7 @@ use October\Rain\Exception\AjaxException;
 use October\Rain\Exception\ValidationException;
 use October\Rain\Parse\Bracket as TextParser;
 use Illuminate\Http\RedirectResponse;
+use System\Models\BotLog;
 
 /**
  * The CMS controller class.
@@ -168,6 +169,11 @@ class Controller
             }
 
             $page = Page::loadCached($this->theme, MaintenanceSetting::get('cms_page'));
+        }
+
+         // Log the bot
+        if (BotLog::isBot()) {
+            BotLog::add();
         }
 
         /**

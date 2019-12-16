@@ -9,6 +9,7 @@ fields:
         placeholder: cms::lang.editor.new_title
         attributes:
             default-focus: 1
+        comment: cms::lang.editor.title_comment
 
     settings[url]:
         span: right
@@ -42,6 +43,7 @@ tabs:
             label: cms::lang.editor.layout
             type: dropdown
             options: getLayoutOptions
+            default: default
 
         settings[description]:
             tab: cms::lang.editor.settings
@@ -49,21 +51,141 @@ tabs:
             type: textarea
             size: tiny
 
-        settings[meta_title]:
-            tab: cms::lang.editor.meta
-            label: cms::lang.editor.meta_title
+        settings[is_hidden]:
+            tab: cms::lang.editor.settings
+            label: cms::lang.editor.hidden
+            type: switch
+            comment: cms::lang.editor.hidden_comment
 
         settings[meta_description]:
             tab: cms::lang.editor.meta
             label: cms::lang.editor.meta_description
             type: textarea
             size: tiny
+            comment: cms::lang.editor.meta_description_comment
 
-        settings[is_hidden]:
-            tab: cms::lang.editor.settings
-            label: cms::lang.editor.hidden
-            type: checkbox
-            comment: cms::lang.editor.hidden_comment
+        settings[meta_keywords]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.meta_keywords
+            type: taglist
+
+        settings[meta_robots_index]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.meta_robots_index
+            type: dropdown
+            span: auto
+            options:
+                index: index
+                noindex: noindex
+
+        settings[meta_robots_follow]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.meta_robots_follow
+            type: dropdown
+            span: auto
+            options:
+                follow: follow
+                nofollow: nofollow
+
+        settings[canonical_url]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.canonical_url
+            span: auto
+
+        settings[redirect_url]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.redirect_url
+            span: auto
+
+        settings[enable_og]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.enable_og
+            comment: cms::lang.editor.enable_og_comment
+            commentHtml: true
+            type: switch
+            span: full
+
+        settings[og_title]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.og_title
+            span: auto
+            trigger:
+                action: show
+                field: settings[enable_og]
+                condition: checked
+
+        settings[og_image]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.og_image
+            comment: cms::lang.editor.og_image_comment
+            type: mediafinder
+            span: auto
+            mode: image
+            trigger:
+                action: show
+                field: settings[enable_og]
+                condition: checked
+
+        settings[og_description]:
+            tab: cms::lang.editor.meta
+            label: cms::lang.editor.og_description
+            comment: cms::lang.editor.og_description_comment
+            type: textarea
+            size: tiny
+            trigger:
+                action: show
+                field: settings[enable_og]
+                condition: checked
+
+        settings[enabled_in_sitemap]:
+            tab: cms::lang.editor.sitemap
+            label: cms::lang.editor.enabled_in_sitemap
+            type: switch
+            span: full
+            comment: cms::lang.editor.enabled_in_sitemap_comment
+            default: true
+
+        settings[sitemap_changefreq]:
+            tab: cms::lang.editor.sitemap
+            label: cms::lang.editor.sitemap_changefreq
+            type: dropdown
+            options: 
+                always: always
+                hourly: hourly
+                weekly: weekly
+                monthly: monthly
+                yearly: yearly
+                never: never
+            span: left
+            default: weekly
+            comment: cms::lang.editor.sitemap_changefreq_comment
+            trigger:
+                action: show
+                field: settings[enabled_in_sitemap]
+                condition: checked
+
+        settings[sitemap_priority]:
+            tab: cms::lang.editor.sitemap
+            label: cms::lang.editor.sitemap_priority
+            type: dropdown
+            options:
+                0.1: 0.1
+                0.2: 0.2
+                0.3: 0.3
+                0.4: 0.4
+                0.5: 0.5
+                0.6: 0.6
+                0.7: 0.7
+                0.8: 0.8
+                0.9: 0.9
+                1.0: 1.0
+            span: right
+            default: 0.5
+            comment: cms::lang.editor.sitemap_priority_comment
+            trigger:
+                action: show
+                field: settings[enabled_in_sitemap]
+                condition: checked
 
 secondaryTabs:
     stretch: true

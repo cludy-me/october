@@ -1,0 +1,11 @@
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/robotstxt.html
+User-agent: *
+
+# For more information about the sitemap.xml standard, see:
+# https://www.sitemaps.org/protocol.html
+Sitemap: http://localhost/sitemap.xml

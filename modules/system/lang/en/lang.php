@@ -422,6 +422,22 @@ return [
         'status_code' => 'Status',
         'preview_title' => 'Request'
     ],
+    'bot_log' => [
+        'hint' => 'This log displays a list of visited bots.',
+        'menu_label' => 'Bot log',
+        'menu_description' => 'View visited bots.',
+        'empty_link' => 'Empty bot log',
+        'empty_loading' => 'Emptying bot log...',
+        'empty_success' => 'Bot log emptied',
+        'return_link' => 'Return to bot log',
+        'id' => 'ID',
+        'id_label' => 'Bot ID',
+        'created_at' => 'Date & Time',
+        'bot' => 'Bot',
+        'url' => 'URL',
+        'level' => 'Level',
+        'preview_title' => 'Bot'
+    ],
     'permissions' => [
         'name' => 'System',
         'manage_system_settings' => 'Manage system settings',
@@ -441,6 +457,8 @@ return [
         'menu_label' => 'Log settings',
         'menu_description' => 'Specify which areas should use logging.',
         'default_tab' => 'Logging',
+        'log_bots' => 'Log bots',
+        'log_bots_comment' => 'Store visited bots.',
         'log_events' => 'Log system events',
         'log_events_comment' => 'Store system events in the database in addition to the file-based log.',
         'log_requests' => 'Log bad requests',

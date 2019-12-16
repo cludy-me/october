@@ -1,0 +1,19 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+    bot:
+        label: system::lang.bot_log.bot
+        searchable: yes
+        width: 100px
+
+    url:
+        label: system::lang.bot_log.url
+        searchable: yes
+        cssClass: column-break-word
+
+    created_at:
+        label: system::lang.bot_log.created_at
+        searchable: yes
+

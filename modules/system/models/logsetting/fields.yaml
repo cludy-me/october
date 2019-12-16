@@ -23,3 +23,9 @@ tabs:
             span: auto
             type: switch
             comment: system::lang.log.log_events_comment
+
+        log_bots:
+            label: system::lang.log.log_bots
+            span: auto
+            type: switch
+            comment: system::lang.log.log_bots_comment

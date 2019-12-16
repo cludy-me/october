@@ -480,16 +480,6 @@ class ServiceProvider extends ModuleServiceProvider
                     'permissions' => ['system.manage_mail_templates'],
                     'order'       => 630
                 ],
-                'event_logs' => [
-                    'label'       => 'system::lang.event_log.menu_label',
-                    'description' => 'system::lang.event_log.menu_description',
-                    'category'    => SettingsManager::CATEGORY_LOGS,
-                    'icon'        => 'icon-exclamation-triangle',
-                    'url'         => Backend::url('system/eventlogs'),
-                    'permissions' => ['system.access_logs'],
-                    'order'       => 900,
-                    'keywords'    => 'error exception'
-                ],
                 'request_logs' => [
                     'label'       => 'system::lang.request_log.menu_label',
                     'description' => 'system::lang.request_log.menu_description',
@@ -497,8 +487,28 @@ class ServiceProvider extends ModuleServiceProvider
                     'icon'        => 'icon-file-o',
                     'url'         => Backend::url('system/requestlogs'),
                     'permissions' => ['system.access_logs'],
-                    'order'       => 910,
+                    'order'       => 900,
                     'keywords'    => '404 error'
+                ],
+                'bot_logs' => [
+                    'label'       => 'system::lang.bot_log.menu_label',
+                    'description' => 'system::lang.bot_log.menu_description',
+                    'category'    => SettingsManager::CATEGORY_LOGS,
+                    'icon'        => 'icon-file-o',
+                    'url'         => Backend::url('system/botlogs'),
+                    'permissions' => ['system.access_logs'],
+                    'order'       => 910,
+                    'keywords'    => 'bot'
+                ],
+                'event_logs' => [
+                    'label'       => 'system::lang.event_log.menu_label',
+                    'description' => 'system::lang.event_log.menu_description',
+                    'category'    => SettingsManager::CATEGORY_LOGS,
+                    'icon'        => 'icon-exclamation-triangle',
+                    'url'         => Backend::url('system/eventlogs'),
+                    'permissions' => ['system.access_logs'],
+                    'order'       => 920,
+                    'keywords'    => 'error exception'
                 ],
                 'log_settings' => [
                     'label'       => 'system::lang.log.menu_label',
