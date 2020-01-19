@@ -44,6 +44,7 @@ return [
     'Flash'           => October\Rain\Support\Facades\Flash::class,
     'Form'            => October\Rain\Support\Facades\Form::class,
     'Html'            => October\Rain\Support\Facades\Html::class,
+    'HtmlFormatter'   => October\Rain\Support\Facades\HtmlFormatter::class,
     'Http'            => October\Rain\Support\Facades\Http::class,
     'Nmap'            => October\Rain\Support\Facades\Nmap::class,
     'Str'             => October\Rain\Support\Facades\Str::class,
